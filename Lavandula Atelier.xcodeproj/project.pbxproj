@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7D9C2E772D861F0D00AF591C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9C2E762D861F0D00AF591C /* FirebaseAnalytics */; };
+		7D9C2E792D861F0D00AF591C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9C2E782D861F0D00AF591C /* FirebaseAuth */; };
+		7D9C2E7B2D861F0D00AF591C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9C2E7A2D861F0D00AF591C /* FirebaseCore */; };
+		7D9C2E7D2D861F0D00AF591C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9C2E7C2D861F0D00AF591C /* FirebaseDatabase */; };
+		7D9C2E7F2D861F0D00AF591C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9C2E7E2D861F0D00AF591C /* FirebaseFirestore */; };
+		7D9C2E812D861F0D00AF591C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9C2E802D861F0D00AF591C /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		7D9C2E472D84FBA300AF591C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +61,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D9C2E772D861F0D00AF591C /* FirebaseAnalytics in Frameworks */,
+				7D9C2E7B2D861F0D00AF591C /* FirebaseCore in Frameworks */,
+				7D9C2E7D2D861F0D00AF591C /* FirebaseDatabase in Frameworks */,
+				7D9C2E7F2D861F0D00AF591C /* FirebaseFirestore in Frameworks */,
+				7D9C2E792D861F0D00AF591C /* FirebaseAuth in Frameworks */,
+				7D9C2E812D861F0D00AF591C /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +127,12 @@
 			);
 			name = "Lavandula Atelier";
 			packageProductDependencies = (
+				7D9C2E762D861F0D00AF591C /* FirebaseAnalytics */,
+				7D9C2E782D861F0D00AF591C /* FirebaseAuth */,
+				7D9C2E7A2D861F0D00AF591C /* FirebaseCore */,
+				7D9C2E7C2D861F0D00AF591C /* FirebaseDatabase */,
+				7D9C2E7E2D861F0D00AF591C /* FirebaseFirestore */,
+				7D9C2E802D861F0D00AF591C /* FirebaseStorage */,
 			);
 			productName = "Lavandula Atelier";
 			productReference = 7D9C2E352D84FBA000AF591C /* Lavandula Atelier.app */;
@@ -195,6 +216,9 @@
 			);
 			mainGroup = 7D9C2E2C2D84FBA000AF591C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7D9C2E362D84FBA000AF591C /* Products */;
 			projectDirPath = "";
@@ -591,6 +615,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7D9C2E762D861F0D00AF591C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7D9C2E782D861F0D00AF591C /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		7D9C2E7A2D861F0D00AF591C /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		7D9C2E7C2D861F0D00AF591C /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		7D9C2E7E2D861F0D00AF591C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		7D9C2E802D861F0D00AF591C /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D9C2E752D861F0D00AF591C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7D9C2E2D2D84FBA000AF591C /* Project object */;
 }
