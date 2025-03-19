@@ -1,0 +1,34 @@
+
+# Xcode files
+DerivedData/
+*.xcworkspace/
+*.xcuserdatad/
+*.xcuserdata/
+*.DS_Store
+*.pbxuser
+*.mode1v3
+*.mode2v3
+
+# Firebase Config (DO NOT COMMIT `GoogleService-Info.plist`)
+GoogleService-Info.plist
+
+# Swift Package Manager
+/.swiftpm
+/Package.resolved
+
+# CocoaPods (if used)
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/
+
+# Archives
+*.xcarchive
+
+# Swift Playgrounds
+playground.xcworkspace/
+
+# Logs and other unnecessary files
+*.log
+*.swp

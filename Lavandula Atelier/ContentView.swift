@@ -8,17 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var userRole: String?
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if let role = userRole {
+            switch role {
+            case "admin":
+                AdminDashboardView()
+            case "vendor":
+                VendorDashboardView()
+            case "customer":
+                CustomerHomeView()
+            default:
+                Text("Unknown Role")
+            }
+        } else {
+            Login()
+                .onAppear {
+                    fetchUserRole { role in
+                        self.userRole = role
+                    }
+                }
         }
-        .padding()
     }
 }
-
-#Preview {
-    ContentView()
-}
+        
+        #Preview {
+            ContentView()
+        }
+    
