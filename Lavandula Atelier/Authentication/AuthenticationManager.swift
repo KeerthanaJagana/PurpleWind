@@ -33,15 +33,15 @@ func signUp(email: String, password: String, role: String, completion: @escaping
     }
 }
 
-func login(email: String, password: String, completion: @escaping (Bool, String?) -> Void) {
-    Auth.auth().signIn(withEmail: email, password: password) { result, error in
-        if let error = error {
-            completion(false, error.localizedDescription)
-        } else {
-            completion(true, nil)
-        }
-    }
-}
+//func login(email: String, password: String, completion: @escaping (Bool, String?) -> Void) {
+//    Auth.auth().signIn(withEmail: email, password: password) { result, error in
+//        if let error = error {
+//            completion(false, error.localizedDescription)
+//        } else {
+//            completion(true, nil)
+//        }
+//    }
+//}
 
 func fetchUserRole(completion: @escaping (String?) -> Void) {
     guard let userID = Auth.auth().currentUser?.uid else {
