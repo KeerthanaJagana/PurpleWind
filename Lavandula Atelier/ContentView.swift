@@ -17,11 +17,11 @@ struct ContentView: View {
                if let role = userRole {
                    switch role {
                    case "admin":
-                       AdminDashboardView(isUserLoggedIn: $isUserLoggedIn)
+                       AdminMainView(isUserLoggedIn: $isUserLoggedIn)
                    case "vendor":
-                       VendorDashboardView()
+                       VendorMainView(isUserLoggedIn: $isUserLoggedIn)
                    case "customer":
-                       CustomerHomeView()
+                       CustomerMainView(isUserLoggedIn: $isUserLoggedIn)
                    default:
                        Text("Unknown Role")
                    }

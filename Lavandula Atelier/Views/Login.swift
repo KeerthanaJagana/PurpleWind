@@ -13,9 +13,11 @@ struct Login: View {
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
+    @State private var showSignUp = false  // Toggle to show Sign Up View
 
     var body: some View {
         VStack {
+            Spacer()
             TextField("Email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .autocapitalization(.none)
@@ -40,6 +42,18 @@ struct Login: View {
                     .foregroundColor(.red)
                     .padding()
             }
+            Spacer()
+            // Sign Up Navigation Button
+                           Button(action: {
+                               showSignUp = true
+                           }) {
+                               Text("Don't have an account? Sign Up")
+                                   .foregroundColor(.blue)
+                           }
+                           .padding()
+                           .sheet(isPresented: $showSignUp) {
+                               SignUP()
+                           }
         }
         .padding()
     }

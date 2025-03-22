@@ -1,60 +1,99 @@
-//
-//  Login1.swift
-//  Lavandula Atelier
-//
-//  Created by Keerthana Jagana on 3/17/25.
-//
-
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct SignUP: View {
     @State private var email = ""
-       @State private var password = ""
-       @State private var selectedRole = "customer"
-       @State private var showAlert = false
-       @State private var alertMessage = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
+    @State private var selectedRole = "customer"  // Default role
+    @State private var errorMessage: String?
+    @Environment(\.presentationMode) var presentationMode
 
-       let roles = ["customer", "vendor"]
-    
+    let roles = ["vendor", "customer"]  // Role options
+
     var body: some View {
         VStack {
-                   TextField("Email", text: $email)
-                       .textFieldStyle(RoundedBorderTextFieldStyle())
-                       .autocapitalization(.none)
-                       .padding()
+            Text("Sign Up")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.bottom, 20)
 
-                   SecureField("Password", text: $password)
-                       .textFieldStyle(RoundedBorderTextFieldStyle())
-                       .padding()
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)
+                .padding()
 
-                   Picker("Select Role", selection: $selectedRole) {
-                       ForEach(roles, id: \.self) { role in
-                           Text(role.capitalized)
-                       }
-                   }
-                   .pickerStyle(SegmentedPickerStyle())
-                   .padding()
+            SecureField("Password", text: $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
 
-                   Button("Sign Up") {
-                       signUp(email: email, password: password, role: selectedRole) { success, message in
-                           if success {
-                               alertMessage = "Sign-up successful!"
-                           } else {
-                               alertMessage = message ?? "Error signing up."
-                           }
-                           showAlert = true
-                       }
-                   }
-                   .buttonStyle(.borderedProminent)
-                   .padding()
-                   .alert(isPresented: $showAlert) {
-                       Alert(title: Text("Sign Up"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                   }
-               }
-               .padding()
+            SecureField("Confirm Password", text: $confirmPassword)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+            // Role Selection Picker
+            Picker("Select Role", selection: $selectedRole) {
+                ForEach(roles, id: \.self) { role in
+                    Text(role.capitalized)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+
+            Button(action: signUp) {
+                Text("Create Account")
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+            .padding()
+
+            if let error = errorMessage {
+                Text(error)
+                    .foregroundColor(.red)
+                    .padding()
+            }
+
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Already have an account? Log In")
+                    .foregroundColor(.blue)
+            }
+            .padding()
+        }
+        .padding()
     }
-}
 
-#Preview {
-    SignUP()
+    func signUp() {
+        guard password == confirmPassword else {
+            errorMessage = "Passwords do not match!"
+            return
+        }
+
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                self.errorMessage = "Sign Up failed: \(error.localizedDescription)"
+            } else {
+                guard let userId = authResult?.user.uid else { return }
+                
+                // Store user role in Firestore
+                let db = Firestore.firestore()
+                db.collection("users").document(userId).setData([
+                    "email": email,
+                    "role": selectedRole
+                ]) { error in
+                    if let error = error {
+                        print("Error saving role: \(error.localizedDescription)")
+                    } else {
+                        print("User role saved successfully")
+                        presentationMode.wrappedValue.dismiss()  // Dismiss Signup View
+                    }
+                }
+            }
+        }
+    }
 }
