@@ -76,7 +76,7 @@ struct BottomNavView: View {
                     Text("Orders")
                 }
 
-            ProfileView()
+            VendorProfileMainView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
@@ -115,5 +115,5 @@ struct BottomNavView: View {
 }
 
 #Preview {
-    BottomNavView(userRole: "customer")  // Change to "vendor" or "admin" for other views
+    BottomNavView(userRole: "vendor")  // Change to "vendor" or "admin" for other views
 }
