@@ -4,43 +4,41 @@
 //
 //  Created by Keerthana Jagana on 3/14/25.
 //
-
 import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
-    @AppStorage("isUserLoggedIn") private var isUserLoggedIn: Bool = Auth.auth().currentUser != nil
-      @State private var userRole: String?
-    
-    var body: some View {
-           if isUserLoggedIn {
-               if let role = userRole {
-                   switch role {
-                   case "admin":
-                       AdminMainView(isUserLoggedIn: $isUserLoggedIn)
-                   case "vendor":
-                       VendorMainView(isUserLoggedIn: $isUserLoggedIn)
-                   case "customer":
-                       CustomerMainView(isUserLoggedIn: $isUserLoggedIn)
-                   default:
-                       Text("Unknown Role")
-                   }
-               } else {
-                   ProgressView()
-                       .onAppear {
-                           fetchUserRole { role in
-                               self.userRole = role
-                           }
-                       }
-               }
-           } else {
-               Login()
-           }
-       }
-    }
+    @StateObject var session = SessionManager()
 
-        
-        #Preview {
-            ContentView()
+    var body: some View {
+        if session.isUserLoggedIn {
+            if let role = session.userRole {
+                switch role {
+                case "admin":
+                    AdminMainView()
+                        .environmentObject(session)
+                case "vendor":
+                    VendorMainView()
+                        .environmentObject(session)
+                case "customer":
+                    CustomerMainView()
+                        .environmentObject(session)
+                default:
+                    Text("Unknown Role")
+                }
+            } else {
+                ProgressView()
+                    .onAppear {
+                        session.fetchUserRole()
+                    }
+            }
+        } else {
+            Login()
+                .environmentObject(session)
         }
-    
+    }
+}
+
+#Preview {
+    ContentView()
+}

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct CustomerMainView: View {
-    @Binding var isUserLoggedIn: Bool  // Binding to update login state
-    
+    //@Binding var isUserLoggedIn: Bool  // Binding to update login state
+    @EnvironmentObject var session: SessionManager  // shared session access
+
     var body: some View {
         VStack {
             
             VStack {
-                        HeaderView(isUserLoggedIn: $isUserLoggedIn)
+                        HeaderView()
                         Spacer()
                         BottomNavView(userRole: "customer")  //  Customer's navbar
                     }
@@ -24,5 +25,6 @@ struct CustomerMainView: View {
 }
 
 #Preview {
-    CustomerMainView(isUserLoggedIn: .constant(true))
+    CustomerMainView()
+        .environmentObject(SessionManager())
 }

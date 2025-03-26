@@ -9,25 +9,21 @@ import SwiftUI
 import FirebaseAuth
 
 struct HeaderView: View {
-   
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var isUserLoggedIn: Bool  // Used to control navigation to LoginView
-    @State private var showSignOutAlert = false  // Controls the alert visibility
+    @EnvironmentObject var session: SessionManager
+    @State private var showSignOutAlert = false
 
     var body: some View {
         HStack {
-          
-            Image("Image") // Replace with  actual logo asset name
+            Image("Image") // Your logo asset
                 .resizable()
                 .scaledToFit()
                 .frame(height: 60)
-                .cornerRadius(10
-                )
+                .cornerRadius(10)
 
             Spacer()
 
             Button(action: {
-                showSignOutAlert = true  // Show confirmation alert
+                showSignOutAlert = true
             }) {
                 Text("Sign Out")
                     .font(.system(size: 16, weight: .medium))
@@ -43,31 +39,19 @@ struct HeaderView: View {
                     title: Text("Sign Out"),
                     message: Text("Are you sure you want to sign out?"),
                     primaryButton: .destructive(Text("Sign Out")) {
-                        signOut()
+                        session.signOut()  // Use shared session manager
                     },
                     secondaryButton: .cancel()
                 )
             }
         }
         .padding()
-        .background(Color(.systemGray6)) // Light background color
+        .background(Color(.systemGray6))
         .cornerRadius(10)
     }
-
-    // Sign Out Function
-    func signOut() {
-        do {
-            try Auth.auth().signOut()
-            isUserLoggedIn = false
-           // UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
-            // Update state to redirect to login screen
-        } catch {
-            print("Error signing out: \(error.localizedDescription)")
-        }
-    }
-
 }
 
 #Preview {
-    HeaderView( isUserLoggedIn: .constant(true))
+    HeaderView()
+        .environmentObject(SessionManager())
 }
