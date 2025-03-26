@@ -15,6 +15,8 @@ struct Login: View {
     @State private var errorMessage: String?
     @State private var showSignUp = false  // Toggle to show Sign Up View
 
+    @EnvironmentObject var session: SessionManager
+
     var body: some View {
         VStack {
             Spacer()
@@ -63,9 +65,11 @@ struct Login: View {
             if let error = error {
                 self.errorMessage = "Login failed: \(error.localizedDescription)"
             } else {
-                self.isUserLoggedIn = true  // ✅ Update login state
-                UserDefaults.standard.set(true, forKey: "isUserLoggedIn")  // ✅ Persist login state
-                print("Login successful")
+//                self.isUserLoggedIn = true  // ✅ Update login state
+//                UserDefaults.standard.set(true, forKey: "isUserLoggedIn")  // ✅ Persist login state
+                session.isUserLoggedIn = true
+                       session.fetchUserRole() // 🔁 fetch fresh role after login
+                print("Login successful with session")
             }
         }
     }

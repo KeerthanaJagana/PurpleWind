@@ -115,5 +115,5 @@ struct BottomNavView: View {
 }
 
 #Preview {
-    BottomNavView(userRole: "vendor")  // Change to "vendor" or "admin" for other views
+    BottomNavView(userRole: "admin")  // Change to "vendor" or "admin" for other views
 }

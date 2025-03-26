@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AdminMainView: View {
-    @Binding var isUserLoggedIn: Bool  // Binding to update login state
-
+    //@Binding var isUserLoggedIn: Bool  // Binding to update login state
+    @EnvironmentObject var session: SessionManager  // shared session access
     var body: some View {
         VStack {
-            HeaderView(isUserLoggedIn: $isUserLoggedIn)  // 🔥 Reusable header
+            HeaderView()  // 🔥 Reusable header
             Spacer()
             BottomNavView(userRole: "admin")  // 🔥 Reusable bottom navbar
         }
@@ -20,5 +20,6 @@ struct AdminMainView: View {
 }
 
 #Preview {
-    AdminMainView(isUserLoggedIn: .constant(true))  // Simulate logged-in state
+    AdminMainView()  // Simulate logged-in state
+        .environmentObject(SessionManager())
 }

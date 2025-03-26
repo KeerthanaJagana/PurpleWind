@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct VendorMainView: View {
-    @Binding var isUserLoggedIn: Bool  // Binding to update login state
+    //@Binding var isUserLoggedIn: Bool  // Binding to update login state
+    @EnvironmentObject var session: SessionManager  // shared session access
 
     var body: some View {
         VStack {
-            HeaderView(isUserLoggedIn: $isUserLoggedIn)
+            HeaderView()
             Spacer()
             BottomNavView(userRole: "vendor")
         }
@@ -21,5 +22,6 @@ struct VendorMainView: View {
 }
 
 #Preview {
-    VendorMainView(isUserLoggedIn: .constant(true))
+    VendorMainView()
+        .environmentObject(SessionManager())
 }

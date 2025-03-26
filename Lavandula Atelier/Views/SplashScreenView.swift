@@ -35,7 +35,7 @@ struct SplashScreenView: View {
                         .foregroundColor(.black)
                         .padding(.top, 20)
                     
-                    Text("A shopping experience like enver before")
+                    Text("A shopping experience like never before")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.black) // Adjust text color for contrast
